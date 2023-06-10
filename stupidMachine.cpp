@@ -41,23 +41,22 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 }
 const int N=200005;
 void solve(){
-  int n;
-  cin>>n;
-  int best=-1,ans=1;
-  for(int i=1;i<=n;i++){
-  	if(n%i==0){
-  		int s=0,x=i;
-  		while(x>0){
-  			s+=x%10;
-  			x/=10;
-  		}
-  		if(s>best){
-  			best=s;
-  			ans=i;
-  		}
-  	} 
-  }
-   cout<<ans<<endl;
+   int count=0,n;
+	    cin>>n;
+	    vector<int>v(n);
+	    for(int i=0;i<n;i++) cin>>v[i];
+	    auto minimum=min_element(v.begin(),v.end());
+	    int position=distance(v.begin(),minimum);
+	    count+=n*(*minimum);
+	    for(int i=0;i<position;i++) v[i]-=*minimum;
+	    while(position>0){
+	   minimum=min_element(v.begin(),v.begin()+position);
+	        count+=(*minimum)*(position);
+	        position=distance(v.begin(),minimum);
+	        for(int i=0;i<position;i++) v[i]-=*minimum;
+	    }
+	   
+	    cout<<count<<endl;
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);
@@ -67,7 +66,7 @@ int32_t main(){
 	#endif
 	clock_t z = clock();
 	int t=1;
-	// cin>>t;
+	cin>>t;
 	while(t--) solve();
 	cerr << "Run Time : " << ((double)(clock()-z) / CLOCKS_PER_SEC);
 	return 0;

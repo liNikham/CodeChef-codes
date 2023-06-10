@@ -41,23 +41,22 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 }
 const int N=200005;
 void solve(){
-  int n;
-  cin>>n;
-  int best=-1,ans=1;
-  for(int i=1;i<=n;i++){
-  	if(n%i==0){
-  		int s=0,x=i;
-  		while(x>0){
-  			s+=x%10;
-  			x/=10;
-  		}
-  		if(s>best){
-  			best=s;
-  			ans=i;
-  		}
-  	} 
+  int n,k;
+  cin>>n>>k;
+  vi v(n);
+  for(int i=0;i<n;i++){
+  	cin>>v[i];
   }
-   cout<<ans<<endl;
+  int maximum=*max_element(all(v));
+  for(int i=0;i<n;i++){
+  	v[i]=maximum-v[i];
+  }
+  if(k%2==0){
+  	for(int i=0;i<n;i++){
+  		v[i]=maximum-v[i];
+  	}
+  }
+  for(auto x:v) cout<<x<<" ";
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);

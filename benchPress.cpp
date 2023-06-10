@@ -41,23 +41,32 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 }
 const int N=200005;
 void solve(){
-  int n;
-  cin>>n;
-  int best=-1,ans=1;
-  for(int i=1;i<=n;i++){
-  	if(n%i==0){
-  		int s=0,x=i;
-  		while(x>0){
-  			s+=x%10;
-  			x/=10;
-  		}
-  		if(s>best){
-  			best=s;
-  			ans=i;
-  		}
-  	} 
-  }
-   cout<<ans<<endl;
+	int n,w,wr;
+	cin>>n>>w>>wr;
+		unordered_map<int,int>weightMap;
+	for(int i=0;i<n;i++){
+		int wi;
+		cin>>wi;
+		weightMap[wi]++;
+	}
+	if(wr>=w) cout<<"yes"<<endl;
+	else{
+	int sum=0,remWeight=w-wr,ans=0;
+
+	for(auto x:weightMap){
+		if(x.second>1){
+			sum+=x.first*((x.second)/2)*2;
+			if(sum>=remWeight) {
+				ans=1;
+				break;
+			}
+		}
+	}
+	if(ans) cout<<"yes"<<endl;
+	else cout<<"no"<<endl;
+	}
+	
+  
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);
@@ -67,7 +76,7 @@ int32_t main(){
 	#endif
 	clock_t z = clock();
 	int t=1;
-	// cin>>t;
+	cin>>t;
 	while(t--) solve();
 	cerr << "Run Time : " << ((double)(clock()-z) / CLOCKS_PER_SEC);
 	return 0;

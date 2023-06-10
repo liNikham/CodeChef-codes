@@ -40,24 +40,29 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 	cout.write(names,comma - names) << ": "<<arg1 << " | "; __f(comma +1,args...);	
 }
 const int N=200005;
-void solve(){
-  int n;
-  cin>>n;
-  int best=-1,ans=1;
-  for(int i=1;i<=n;i++){
-  	if(n%i==0){
-  		int s=0,x=i;
-  		while(x>0){
-  			s+=x%10;
-  			x/=10;
-  		}
-  		if(s>best){
-  			best=s;
-  			ans=i;
-  		}
-  	} 
+int mysoln(int n,int k,vi v){
+
+  if(n<k) return 0;
+  else{
+  	 int noOfgrps=0;
+  	while(count(all(v),0)<=n-k){
+  		sort(all(v));
+  		int times=v[n-k]-v[n-k]+1;
+  		noOfgrps+=times;
+  		for(int i=n-k;i<n;i++) v[i]-=times;
+  			sort(all(v));
+
+  	}
+  	return noOfgrps;
   }
-   cout<<ans<<endl;
+}
+void solve(){
+  int n,k;
+  cin>>n>>k;
+  vi v(n);
+  for(int i=0;i<n;i++) cin>>v[i];
+  
+  
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);
@@ -67,7 +72,7 @@ int32_t main(){
 	#endif
 	clock_t z = clock();
 	int t=1;
-	// cin>>t;
+	cin>>t;
 	while(t--) solve();
 	cerr << "Run Time : " << ((double)(clock()-z) / CLOCKS_PER_SEC);
 	return 0;

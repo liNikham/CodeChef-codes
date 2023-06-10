@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define mod 1000000007
 #define int            long long int
 #define F              first
 #define S              second
@@ -41,23 +42,23 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 }
 const int N=200005;
 void solve(){
-  int n;
-  cin>>n;
-  int best=-1,ans=1;
-  for(int i=1;i<=n;i++){
-  	if(n%i==0){
-  		int s=0,x=i;
-  		while(x>0){
-  			s+=x%10;
-  			x/=10;
-  		}
-  		if(s>best){
-  			best=s;
-  			ans=i;
-  		}
-  	} 
-  }
-   cout<<ans<<endl;
+      int n,k;
+	    cin>>n>>k;
+	    
+	   if(n>k){
+	       int fact=1;
+	        for(int i=1;i<=k;i++) fact=(fact*i)%mod;
+	    cout<<fact<<endl;
+	   }
+	   else{
+	       int fact=1;
+	       while(n>0){
+	           fact=(fact*k)%mod ;
+	           k--;
+	           n--;
+	       }
+	       cout<<fact<<endl;
+	   }
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);
@@ -67,7 +68,7 @@ int32_t main(){
 	#endif
 	clock_t z = clock();
 	int t=1;
-	// cin>>t;
+	cin>>t;
 	while(t--) solve();
 	cerr << "Run Time : " << ((double)(clock()-z) / CLOCKS_PER_SEC);
 	return 0;

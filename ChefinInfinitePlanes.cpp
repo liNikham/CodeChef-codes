@@ -41,23 +41,23 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 }
 const int N=200005;
 void solve(){
-  int n;
+  unordered_map<int,int> m;
+  int n,count=0;
   cin>>n;
-  int best=-1,ans=1;
-  for(int i=1;i<=n;i++){
-  	if(n%i==0){
-  		int s=0,x=i;
-  		while(x>0){
-  			s+=x%10;
-  			x/=10;
-  		}
-  		if(s>best){
-  			best=s;
-  			ans=i;
-  		}
-  	} 
+  for(int i=0;i<n;i++){
+      int x; cin>>x;
+      if(m.find(x)==m.end()) {
+      	m[x]=1; count++;
+      }
+      else {
+      	if(m[x]<x-1) {
+      		count++; m[x]++;
+      	}
+      }
+      cout<<count<<" ";
   }
-   cout<<ans<<endl;
+  cout<<endl;
+  cout<<count<<endl;
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);
@@ -67,7 +67,7 @@ int32_t main(){
 	#endif
 	clock_t z = clock();
 	int t=1;
-	// cin>>t;
+	cin>>t;
 	while(t--) solve();
 	cerr << "Run Time : " << ((double)(clock()-z) / CLOCKS_PER_SEC);
 	return 0;
