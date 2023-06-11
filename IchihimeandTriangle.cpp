@@ -41,18 +41,29 @@ void __f ( const char*names,Arg1&& arg1,Args&&... args)
 }
 const int N=200005;
 void solve(){
-  int odd=0,even=0,n,mod=1000000007,result;
-  cin>>n;
-  for(int i=0;i<n;i++){
-  	int x; cin>>x;
-  	if(x%2==0)even++;
-  	else odd++;
-  }
-  if(odd%2==1)
-   result=((power(2,even)%mod)*(1+power(2,odd-2))%mod)%mod;
-else
-	 result=((power(2,even)%mod)*(power(2,odd-2))%mod)%mod;
- cout<<result<<endl;
+  int a,b,c,d,x,y,z;
+  cin>>a>>b>>c>>d;
+   if(a==b) {
+   	x=a;
+     y=c;
+     z=c;
+   }
+   else if(b==c) {
+   	y=b;
+   	x=b;
+   	z=c;
+   }
+   else if(c==d) {
+   	z=c;
+   	x=b;
+   	y=c;
+   }
+   else{
+      x=b;
+      y=c;
+      z=c;
+   }
+   cout<<x<<" "<<y<<" "<<z<<endl;
 }
 int32_t main(){
 	ios_base::sync_with_stdio;cin.tie(0);cout.tie(0);
